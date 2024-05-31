@@ -13,12 +13,19 @@ class Project extends Model
 
     protected $fillable = [
         'title',
+        'image',
         'description',
         'slug',
     ];
 
     public static function generateSlug($title)
     {
-        return Str::slug($title, '-');
+        $slug = Str::slug($title, '-');
+        $c = 1;
+        while (Project::where('slug', $slug)->first()) {
+            $slug = Str::of($title)->slug('-') . '-' . $c;
+            $c++;
+        }
+        return $slug;
     }
 }
