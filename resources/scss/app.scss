@@ -21,6 +21,7 @@ $fa-font-path: "../webfonts" !default;
     }
     #content {
         flex-grow: 1;
+        overflow-y: scroll;
         header {
             .profile-picture {
                 width: 40px;
