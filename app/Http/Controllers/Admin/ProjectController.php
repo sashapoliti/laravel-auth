@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -50,15 +52,18 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $form_data = $request->all();
+        $form_data['slug'] = Project::generateSlug($form_data['title']);
+        $project->update($form_data);
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully');
     }
 
     /**

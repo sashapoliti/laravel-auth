@@ -11,7 +11,7 @@
         @endif
         <div class="d-flex justify-content-between align-items-center py-4">
             <h1>Projects</h1>
-            <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Crea nuovo post</a>
+            <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Add new project</a>
         </div>
         <table class="table table-striped">
             <thead>
