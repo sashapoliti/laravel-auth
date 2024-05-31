@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -28,12 +29,12 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
         $form_data = $request->all();
         $form_data['slug'] = Project::generateSlug($form_data['title']);
         $newProject = Project::create($form_data);
-        return redirect()->route('admin.posts.index', $newProject->slug);
+        return redirect()->route('admin.projects.index')->with('success', 'Project created successfully');
     }
 
     /**
